@@ -8,8 +8,6 @@ for action in actions:
         except:
             pass
 
-# cap = cv2.VideoCapture(0)
-# Set mediapipe model 
 with mp_hands.Hands(
     model_complexity=0,
     min_detection_confidence=0.5,
@@ -24,14 +22,10 @@ with mp_hands.Hands(
             for frame_num in range(sequence_length):
 
                 # Read feed
-                # ret, frame = cap.read()
                 frame=cv2.imread('Image/{}/{}.png'.format(action,sequence))
-                # frame=cv2.imread('{}{}.png'.format(action,sequence))
-                # frame=cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
 
                 # Make detections
                 image, results = mediapipe_detection(frame, hands)
-#                 print(results)
 
                 # Draw landmarks
                 draw_styled_landmarks(image, results)
@@ -60,7 +54,6 @@ with mp_hands.Hands(
                 if cv2.waitKey(10) & 0xFF == ord('q'):
                     break
                     
-    # cap.release()
     cv2.destroyAllWindows()
 
 

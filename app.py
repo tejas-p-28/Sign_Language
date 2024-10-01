@@ -31,8 +31,6 @@ predictions = []
 threshold = 0.8 
 
 cap = cv2.VideoCapture(0)
-# cap = cv2.VideoCapture("https://192.168.43.41:8080/video")
-# Set mediapipe model 
 with mp_hands.Hands(
     model_complexity=0,
     min_detection_confidence=0.5,
@@ -44,14 +42,10 @@ with mp_hands.Hands(
 
         # Make detections
         cropframe=frame[40:400,0:300]
-        # print(frame.shape)
         frame=cv2.rectangle(frame,(0,40),(300,400),255,2)
-        # frame=cv2.putText(frame,"Active Region",(75,25),cv2.FONT_HERSHEY_COMPLEX_SMALL,2,255,2)
         image, results = mediapipe_detection(cropframe, hands)
-        # print(results)
         
         # Draw landmarks
-        # draw_styled_landmarks(image, results)
         # 2. Prediction logic
         keypoints = extract_keypoints(results)
         sequence.append(keypoints)
@@ -80,9 +74,7 @@ with mp_hands.Hands(
                     accuracy=accuracy[-1:]
 
                 # Viz probabilities
-                # frame = prob_viz(res, actions, frame, colors,threshold)
         except Exception as e:
-            # print(e)
             pass
             
         cv2.rectangle(frame, (0,0), (300, 40), (245, 117, 16), -1)

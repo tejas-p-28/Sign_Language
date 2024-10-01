@@ -5,7 +5,6 @@ from keras.models import Sequential
 from keras.layers import LSTM, Dense
 from keras.callbacks import TensorBoard
 label_map = {label:num for num, label in enumerate(actions)}
-# print(label_map)
 sequences, labels = [], []
 for action in actions:
     for sequence in range(no_sequences):
